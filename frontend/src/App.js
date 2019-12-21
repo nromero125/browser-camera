@@ -39,7 +39,7 @@ export default function App () {
       <div id="vid_container">
       <Webcam
         audio={false} 
-        videoConstraints={{ facingMode }}
+        videoConstraints={{ facingMode: facingMode }}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
       />
