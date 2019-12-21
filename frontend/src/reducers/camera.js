@@ -1,8 +1,9 @@
-import {SWITCH_CAMERA, GET_DEVICES} from "../types/camera";
+import {SWITCH_CAMERA, GET_DEVICES, SWITCH_FACING_MODE} from "../types/camera";
 
 const initialState = {
     devices: [],
-    selectedDevice : null  
+    selectedDevice : null,
+    facingMode: 'user'
 };
 
 export default function (state = initialState, action) {
@@ -17,6 +18,12 @@ export default function (state = initialState, action) {
                 ...state,
                 devices: action.payload
             };
+        case SWITCH_FACING_MODE:
+            console.log('facingmode', action.payload);
+            return {
+                ...state,
+                facingMode: action.payload === 'user' ? 'environment' : 'user'
+            }
         default:
             return state;
     }

@@ -1,2 +1,3 @@
 export const SWITCH_CAMERA = 'SWITCH_CAMERA';
 export const GET_DEVICES = 'GET_DEVICES';
+export const SWITCH_FACING_MODE = 'SWITCH_FACING_MODE';

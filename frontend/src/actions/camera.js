@@ -1,4 +1,4 @@
-import {GET_DEVICES, SWITCH_CAMERA} from '../types/camera';
+import {GET_DEVICES, SWITCH_CAMERA, SWITCH_FACING_MODE} from '../types/camera';
 
 
 export const getDevices = () => dispatch => {
@@ -13,9 +13,15 @@ export const getDevices = () => dispatch => {
 }
 
 export const setSelectedDevice = (device) => dispatch => {
-    console.log(device);
     dispatch({
         type: SWITCH_CAMERA,
         payload: device
+    });
+}
+
+export const switchFacingMode = (facingMode) => dispatch => {
+    dispatch({
+        type: SWITCH_FACING_MODE,
+        payload: facingMode
     });
 }

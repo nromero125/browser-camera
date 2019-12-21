@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import Webcam from "react-webcam";
 import CameraDropdown from './Components/CameraDropdown';
 import { useDispatch, useSelector } from "react-redux";
-import {getDevices} from './actions/camera';
+import {getDevices, switchFacingMode} from './actions/camera';
 import './App.css';
  
 
@@ -14,7 +14,9 @@ const useFetching = (action, dispatch) => {
 
 export default function App () {
   const devices = useSelector(state => state.camera.devices);
-  let selectedDevice = useSelector(state => state.camera.selectedDevice);
+  let deviceId = useSelector(state => state.camera.deviceId);
+  let facingMode = useSelector(state => state.camera.facingMode);
+
   const dispatch = useDispatch();
   useFetching(getDevices(), dispatch);
 
@@ -28,15 +30,16 @@ export default function App () {
     [webcamRef]
   );
   
-  console.log(devices);
-  console.log(selectedDevice);
+  const changeFacingMode = (facingMode) => {
+      dispatch(switchFacingMode(facingMode));
+  }
  
   return (
     <div className="container">
       <div id="vid_container">
       <Webcam
         audio={false} 
-        videoConstraints={{ selectedDevice }}
+        videoConstraints={{ deviceId, facingMode }}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
       />
@@ -45,7 +48,7 @@ export default function App () {
       
        <div id="controls">
          <CameraDropdown className="leftButton" devices={devices}/>
-          {/* <button className="leftButton" onClick={showDevices} name="switch Camera" type="button" aria-pressed="false">Abbruch</button> */}
+          <button className="leftButton" onClick={() => changeFacingMode(facingMode)} name="switch Camera" type="button" aria-pressed="false">Abbruch</button>
           <button className="takePhotoButton" onClick={capture} name="take Photo" type="button"></button>
           <button className="rightButton" name="toggle FullScreen" type="button" aria-pressed="false">Fertig</button>
       </div>
