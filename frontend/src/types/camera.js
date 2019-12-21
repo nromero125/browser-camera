@@ -1,0 +1,2 @@
+export const SWITCH_CAMERA = 'SWITCH_CAMERA';
+export const GET_DEVICES = 'GET_DEVICES';
