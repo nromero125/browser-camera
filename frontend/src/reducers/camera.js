@@ -3,7 +3,7 @@ import {SWITCH_CAMERA, GET_DEVICES, SWITCH_FACING_MODE} from "../types/camera";
 const initialState = {
     devices: [],
     selectedDevice : null,
-    facingMode: 'user'
+    facingMode: 'environment'
 };
 
 export default function (state = initialState, action) {

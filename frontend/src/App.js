@@ -33,13 +33,13 @@ export default function App () {
   const changeFacingMode = (facingMode) => {
       dispatch(switchFacingMode(facingMode));
   }
- 
+ console.log('actual facingmode', facingMode);
   return (
     <div className="container">
       <div id="vid_container">
       <Webcam
         audio={false} 
-        videoConstraints={{ deviceId, facingMode }}
+        videoConstraints={{ facingMode }}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
       />
@@ -47,7 +47,7 @@ export default function App () {
     </div>
       
        <div id="controls">
-         <CameraDropdown className="leftButton" devices={devices}/>
+         {/* <CameraDropdown className="leftButton" devices={devices}/> */}
           <button className="leftButton" onClick={() => changeFacingMode(facingMode)} name="switch Camera" type="button" aria-pressed="false">Abbruch</button>
           <button className="takePhotoButton" onClick={capture} name="take Photo" type="button"></button>
           <button className="rightButton" name="toggle FullScreen" type="button" aria-pressed="false">Fertig</button>

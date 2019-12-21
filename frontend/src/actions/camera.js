@@ -20,6 +20,11 @@ export const setSelectedDevice = (device) => dispatch => {
 }
 
 export const switchFacingMode = (facingMode) => dispatch => {
+    let supports = navigator.mediaDevices.getSupportedConstraints();
+    if( supports['facingMode'] === true ) {
+        console.log('Si se puede!!');
+    }
+    
     dispatch({
         type: SWITCH_FACING_MODE,
         payload: facingMode
