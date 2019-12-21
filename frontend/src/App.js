@@ -6,9 +6,7 @@ const FACING_MODE_USER = "user";
 const FACING_MODE_ENVIRONMENT = "environment";
 
 const videoConstraints = { 
-  facingMode: FACING_MODE_USER,
-  width: 1280, 
-  height: 720 
+  facingMode: FACING_MODE_USER
 };
  
 export default function App () {
@@ -39,10 +37,8 @@ export default function App () {
       <div id="vid_container">
       <Webcam
         audio={false}
-        height={720}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={1280}
         videoConstraints={videoConstraints}
       />
         <div id="video_overlay"></div>
