@@ -13,6 +13,7 @@ export const getDevices = () => dispatch => {
 }
 
 export const setSelectedDevice = (device) => dispatch => {
+    console.log(device);
     dispatch({
         type: SWITCH_CAMERA,
         payload: device

@@ -27,7 +27,9 @@ export default function App () {
     },
     [webcamRef]
   );
-    
+  
+  console.log(devices);
+  console.log(selectedDevice);
  
   return (
     <div className="container">
