@@ -13,8 +13,9 @@ const useFetching = (action, dispatch) => {
 };
 
 export default function App () {
-  const devices = useSelector(state => state.camera.devices);
-  let deviceId = useSelector(state => state.camera.deviceId);
+
+  /* const devices = useSelector(state => state.camera.devices);
+  let deviceId = useSelector(state => state.camera.deviceId); */
   let facingMode = useSelector(state => state.camera.facingMode);
 
   const dispatch = useDispatch();
@@ -29,7 +30,15 @@ export default function App () {
     },
     [webcamRef]
   );
-  
+
+  const stop = () => {
+    let stream = webcamRef.current.video.srcObject;
+    const tracks = stream.getTracks();
+    
+    tracks.forEach(track => track.stop());
+    webcamRef.current.video.srcObject = null;
+  };
+
   const changeFacingMode = (facingMode) => {
       dispatch(switchFacingMode(facingMode));
   }
@@ -48,7 +57,7 @@ export default function App () {
       
        <div id="controls">
          {/* <CameraDropdown className="leftButton" devices={devices}/> */}
-          <button className="leftButton" onClick={() => changeFacingMode(facingMode)} name="switch Camera" type="button" aria-pressed="false">Abbruch</button>
+          <button className="leftButton" onClick={() => {stop(); changeFacingMode(facingMode);}} name="switch Camera" type="button" aria-pressed="false">Abbruch</button>
           <button className="takePhotoButton" onClick={capture} name="take Photo" type="button"></button>
           <button className="rightButton" name="toggle FullScreen" type="button" aria-pressed="false">Fertig</button>
       </div>
