@@ -19,7 +19,6 @@ export default function (state = initialState, action) {
                 devices: action.payload
             };
         case SWITCH_FACING_MODE:
-            console.log('facingmode', action.payload);
             return {
                 ...state,
                 facingMode: action.payload === 'user' ? 'environment' : 'user'

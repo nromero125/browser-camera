@@ -40,6 +40,7 @@ export default function App () {
   };
 
   const changeFacingMode = (facingMode) => {
+      stop();
       dispatch(switchFacingMode(facingMode));
   }
  console.log('actual facingmode', facingMode);
@@ -57,7 +58,7 @@ export default function App () {
       
        <div id="controls">
          {/* <CameraDropdown className="leftButton" devices={devices}/> */}
-          <button className="leftButton" onClick={() => {stop(); changeFacingMode(facingMode);}} name="switch Camera" type="button" aria-pressed="false">Abbruch</button>
+          <button className="leftButton" onClick={() => {changeFacingMode(facingMode);}} name="switch Camera" type="button" aria-pressed="false">Abbruch</button>
           <button className="takePhotoButton" onClick={capture} name="take Photo" type="button"></button>
           <button className="rightButton" name="toggle FullScreen" type="button" aria-pressed="false">Fertig</button>
       </div>
