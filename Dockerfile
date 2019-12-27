@@ -16,4 +16,4 @@ EXPOSE 80
 EXPOSE 5000
 COPY --from=builder /app/build /usr/share/nginx/html
 COPY --from=builder /app/backend /usr/share/nginx/html/backend
-CMD [ "npm", "start" ]
+RUN node /usr/share/nginx/html/backend/bin/www
