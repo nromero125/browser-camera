@@ -9,6 +9,7 @@ COPY /frontend/package.json /frontend
 WORKDIR /app/frontend
 
 COPY ./frontend /app/frontend
+RUN ./frontend/.env.staging /app/frontend/.env
 RUN npm install
 RUN npm run build
 RUN mv /app/frontend/build /app/public
