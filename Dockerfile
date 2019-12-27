@@ -13,9 +13,10 @@ RUN npm run build
 
 WORKDIR /app
 RUN mkdir backend
-COPY /backend/package.json /backend
-RUN npm install
+#COPY /backend/package.json /backend
 COPY ./backend /app/backend
+RUN npm install
+
 
 FROM nginx
 EXPOSE 80
