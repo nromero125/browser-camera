@@ -21,5 +21,7 @@ WORKDIR /app/backend
 COPY ./backend .
 RUN npm install
 
+COPY pm2.conf /etc/supervisor/conf.d
+
 RUN npm install -g pm2
 RUN pm2 start /app/backend/bin/www
