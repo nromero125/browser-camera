@@ -1,3 +1,8 @@
 export const SWITCH_CAMERA = 'SWITCH_CAMERA';
 export const GET_DEVICES = 'GET_DEVICES';
 export const SWITCH_FACING_MODE = 'SWITCH_FACING_MODE';
+export const SEND_PHOTO = 'SEND_PHOTO';
+export const SEND_PHOTO_SUCCESS = 'SEND_PHOTO_SUCCESS';
+export const SEND_PHOTO_FAIL = 'SEND_PHOTO_FAIL';
+export const TAKE_PHOTO = 'TAKE_PHOTO';
+export const CANCEL_PHOTO = 'CANCEL_PHOTO';
