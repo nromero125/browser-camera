@@ -3,13 +3,12 @@ FROM node:alpine as builder
 
 WORKDIR /app
 RUN mkdir frontend
-RUN ls
+
 COPY /frontend/package.json /frontend
 WORKDIR /app/frontend
-RUN ls
-RUN npm install
+
 COPY ./frontend /app/frontend
-RUN ls
+RUN npm install
 RUN npm run build
 
 WORKDIR /app
