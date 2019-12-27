@@ -23,6 +23,7 @@ EXPOSE 80
 COPY --from=builder /app/frontend/build /usr/share/nginx/html
 
 FROM node:alpine
+WORKDIR /app
 EXPOSE 5000
 COPY --from=builder /app/backend /app
 CMD ["npm", "start"]
