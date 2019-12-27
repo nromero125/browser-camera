@@ -21,4 +21,4 @@ COPY ./backend .
 RUN npm install
 
 RUN npm install -g pm2
-RUN pm2 start /bin/www
+RUN pm2 start /app/backend/bin/www
