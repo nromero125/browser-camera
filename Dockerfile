@@ -1,7 +1,8 @@
   
-FROM node:alpine as builder
+FROM nromero125/dokku-php7.3
 
-WORKDIR /app
+COPY nginx/default /etc/nginx/sites-available
+
 RUN mkdir frontend
 
 COPY /frontend/package.json /frontend
@@ -10,15 +11,14 @@ WORKDIR /app/frontend
 COPY ./frontend /app/frontend
 RUN npm install
 RUN npm run build
+RUN mv /app/frontend/build /app/public
 
-FROM nginx
-EXPOSE 80
-COPY --from=builder /app/frontend/build /usr/share/nginx/html
-
-FROM node:alpine
 WORKDIR /app
+RUN mkdir backend
+WORKDIR /app/backend
+
 COPY ./backend .
 RUN npm install
-EXPOSE 5000
 
-CMD ["npm", "start"]
+RUN npm install -g pm2
+RUN pm2 start /bin/www
