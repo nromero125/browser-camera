@@ -2,20 +2,27 @@
 FROM node:alpine as builder
 
 WORKDIR /app
-COPY /frontend/package.json .
+RUN mkdir frontend
+RUN ls
+COPY /frontend/package.json /frontend
+WORKDIR /app/frontend
+RUN ls
 RUN npm install
-COPY ./frontend .
+COPY ./frontend /app/frontend
+RUN ls
 RUN npm run build
-RUN rm package.json && rm -R frontend && rm -R node_modules
-COPY /backend/package.json .
+
+WORKDIR /app
+RUN mkdir backend
+COPY /backend/package.json ./backend
 RUN npm install
-COPY ./backend ./backend
-COPY ./node_modules ./backend
+COPY ./backend /app/backend
 
 FROM nginx
 RUN apt-get update && apt-get install -y nodejs
 EXPOSE 80
 EXPOSE 5000
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/frontend/build /usr/share/nginx/html
 COPY --from=builder /app/backend /usr/share/nginx/html/backend
-RUN node /usr/share/nginx/html/backend/bin/www
+WORKDIR /usr/share/nginx/html/backend
+CMD [ "npm", "start" ]
