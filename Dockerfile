@@ -11,7 +11,7 @@ RUN npm install
 COPY ./backend ./backend
 
 FROM nginx
-RUN yum -y update && yum install -y nodejs
+RUN apt-get update && apt-get install nodejs
 EXPOSE 80
 EXPOSE 5000
 COPY --from=builder /app/build /usr/share/nginx/html
