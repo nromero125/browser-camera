@@ -40,6 +40,9 @@ exports.generatePdf = async (req, res) => {
         });
 
     } catch(err){
-        console.log(err);
+        res.json({
+            success: false,
+            message: err
+        });
     }
 }
