@@ -13,7 +13,7 @@ RUN npm run build
 
 WORKDIR /app
 RUN mkdir backend
-COPY /backend/package.json ./backend
+COPY /backend/package.json /backend
 RUN npm install
 COPY ./backend /app/backend
 
