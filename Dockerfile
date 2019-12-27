@@ -24,5 +24,5 @@ COPY --from=builder /app/frontend/build /usr/share/nginx/html
 
 FROM node:latest
 EXPOSE 5000
-COPY --from=builder /app/backend /usr/share/nginx/html/backend
+COPY --from=builder /app/backend /usr/src/app/
 CMD ["npm", "start"]
