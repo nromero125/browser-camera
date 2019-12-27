@@ -22,7 +22,7 @@ FROM nginx
 EXPOSE 80
 COPY --from=builder /app/frontend/build /usr/share/nginx/html
 
-FROM node:latest
+FROM node:alpine
 EXPOSE 5000
-COPY --from=builder /app/backend /usr/src/app/
+COPY --from=builder /app/backend /app
 CMD ["npm", "start"]
