@@ -4,7 +4,6 @@ import ConfirmModal from './Components/ConfirmModal';
 import { useDispatch, useSelector } from "react-redux";
 import {takePhoto, cancelPhoto} from './actions/camera';
 import './App.css';
-import redButton from './assets/red-inside-red.svg';
 import UIfx from 'uifx'
 import shutterSound from './assets/Camera-Beep.mp3';
 
