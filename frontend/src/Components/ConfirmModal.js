@@ -9,8 +9,10 @@ const dispatch = useDispatch();
 const [visible, setVisible] = useState(false);
 const [ModalText, setModalText] = useState('');
   const showModal = () => {
-    setVisible(!visible);
-    setModalText('Are you sure that you want to send this document?');
+    if(cameraState.photo) {
+      setVisible(!visible);
+      setModalText('Are you sure that you want to send this document?');
+    }
   };
 
   const handleOk = () => {
