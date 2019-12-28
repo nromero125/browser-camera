@@ -1,16 +1,24 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import Webcam from "react-webcam";
-import { Modal, Button } from 'antd';
 import ConfirmModal from './Components/ConfirmModal';
 import { useDispatch, useSelector } from "react-redux";
-import {switchFacingMode, sendPhoto, takePhoto, cancelPhoto} from './actions/camera';
+import {takePhoto, cancelPhoto} from './actions/camera';
 import './App.css';
- 
+import redButton from './assets/red-inside-red.svg';
+import UIfx from 'uifx'
+import shutterSound from './assets/Camera-Beep.mp3';
 
 export default function App () {
+  const bell = new UIfx(
+    shutterSound,
+    {
+      volume: 0.4, // number between 0.0 ~ 1.0
+      throttleMs: 100
+    }
+  )
+
   let facingMode = useSelector(state => state.camera.facingMode);
   let cameraState = useSelector(state => state.camera);
-  console.log(cameraState);
 
   const dispatch = useDispatch();
 
@@ -18,6 +26,7 @@ export default function App () {
 
   const capture = React.useCallback(
     () => {
+      bell.play();
       const imageSrc = webcamRef.current.getScreenshot();
       dispatch(takePhoto(imageSrc));
     },
@@ -28,43 +37,24 @@ export default function App () {
     dispatch(cancelPhoto());
   }
 
-  const successModal = () => {
-    Modal.success({
-      content: 'Sent Successfully',
-    });
-  }
-  //Switch Camera
-  /* const stop = () => {
-    let stream = webcamRef.current.video.srcObject;
-    const tracks = stream.getTracks();
-    
-    tracks.forEach(track => track.stop());
-    webcamRef.current.video.srcObject = null;
-  };
-
-  const changeFacingMode = (facingMode) => {
-      stop();
-      dispatch(switchFacingMode(facingMode));
-  } */
- 
   return (
     <div className="container">
       <div id="vid_container">
         {
           cameraState.taked ? <img src={cameraState.photo} /> : 
           <Webcam
+          className="border"
           audio={false} 
           videoConstraints={{ facingMode: facingMode }}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
         />  
         }
-        <div id="video_overlay"></div>
     </div>
       
        <div id="controls">
           <button className="leftButton" onClick={deletePhoto} name="switch Camera" type="button" aria-pressed="false">Abbruch</button>
-          <button className="takePhotoButton" onClick={capture} name="take Photo" type="button"></button>
+          <div onClick={capture} className="takePhotoButton"></div>
           <ConfirmModal />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import { Modal, Button } from 'antd';
-import {switchFacingMode, sendPhoto, takePhoto, cancelPhoto} from '../actions/camera';
+import { Modal } from 'antd';
+import {sendPhoto, cancelPhoto} from '../actions/camera';
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ConfirmModal() {
