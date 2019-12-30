@@ -13,7 +13,9 @@ RUN cp .env.staging .env
 RUN npm install
 RUN npm run build
 
+
 WORKDIR /app
+RUN ls
 RUN mv /app/frontend/build/* /app/public/
 RUN mkdir backend
 WORKDIR /app/backend
