@@ -1,5 +1,4 @@
 process.env.NODE_ENV = "test";
-process.env.EMAIL_TO = "nromero125@gmail.com";
 
 let chai = require("chai");
 let chaiHttp = require("chai-http");
@@ -19,11 +18,33 @@ describe("/POST base64 image", () => {
     };
     chai
       .request(server)
-      .post("/api/send-document")
+      .post("/api/v1/documents")
       .send(data)
       .end((err, res) => {
         res.should.have.status(200);
         expect(res.body).to.have.property("success");
+        done();
       });
   });
+});
+
+
+/*
+ * Test send a document
+ */
+describe("/POST error base64 image", () => {
+    it("it should send a bad request if you don't send a image", done => {
+        let data = {
+            doc: 'ARANDOMSTRING'
+        };
+        chai
+            .request(server)
+            .post("/api/v1/documents")
+            .send(data)
+            .end((err, res) => {
+                res.should.have.status(400);
+                expect(res.body.success).to.be.eql(false);
+                done();
+            });
+    });
 });
