@@ -1,7 +1,8 @@
 const PDFDocument = require("pdfkit");
+
 const helper = require("../helpers/pdf");
 
-exports.generatePdf = async (req, res) => {
+exports.generatePdf = (req, res) => {
   try {
     // Create a document
     const doc = new PDFDocument();
@@ -9,13 +10,15 @@ exports.generatePdf = async (req, res) => {
     // Create the pdf data in memoery and insert the image;
     const img = req.body.doc.replace("data:image/jpeg;base64,", "");
 
-    doc.image(new Buffer.from(img, "base64"), 0, 10, { width: 600 }); // this will decode your base64 to a new buffer
+    // this will decode your base64 to a new buffer
+    doc.image(new Buffer.from(img, "base64"), 0, 10, { width: 600 });
+
     doc.end();
     const buffers = [];
     doc.on("data", buffers.push.bind(buffers));
-    doc.on("end", () => {
+    doc.on("end", async () => {
       const pdfData = Buffer.concat(buffers);
-      helper.sendDocument(new Buffer.from(pdfData, "base64"));
+      await helper.sendDocument(new Buffer.from(pdfData, "base64"));
     });
   } catch (err) {
     res.status(400).json({
