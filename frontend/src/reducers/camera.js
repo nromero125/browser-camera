@@ -1,37 +1,23 @@
 import {
-  SWITCH_CAMERA,
   TAKE_PHOTO,
   CANCEL_PHOTO,
-  GET_DEVICES,
-  SWITCH_FACING_MODE,
   SEND_PHOTO,
   SEND_PHOTO_FAIL,
   SEND_PHOTO_SUCCESS
 } from "../types/camera";
 
 const initialState = {
-  devices: [],
-  selectedDevice: null,
   facingMode: "environment",
   success: false,
   taked: false,
   isFetching: false,
-  photo: ""
+  photo: "",
+  errorMessage: "",
+  successMessage: ""
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SWITCH_CAMERA:
-      return {
-        ...state,
-        selectedDevice: action.payload
-      };
-    case GET_DEVICES:
-      return {
-        ...state,
-        devices: action.payload
-      };
-
     case TAKE_PHOTO:
       return {
         ...state,
@@ -44,11 +30,6 @@ export default function(state = initialState, action) {
         taked: false,
         photo: ""
       };
-    case SWITCH_FACING_MODE:
-      return {
-        ...state,
-        facingMode: action.payload === "user" ? "environment" : "user"
-      };
     case SEND_PHOTO:
       return {
         ...state,
@@ -58,14 +39,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        success: true
+        success: true,
+        successMessage: action.payload.message
       };
 
     case SEND_PHOTO_FAIL:
       return {
         ...state,
         isFetching: false,
-        errorMessage: action.payload.error
+        errorMessage: action.payload.message
       };
     default:
       return state;
