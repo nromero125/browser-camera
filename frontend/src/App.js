@@ -16,7 +16,7 @@ export default function App() {
 
   let facingMode = useSelector(state => state.camera.facingMode);
   let cameraState = useSelector(state => state.camera);
-  console.log(cameraState);
+  
 
   const dispatch = useDispatch();
 
